@@ -1,5 +1,9 @@
 # G5Robotics
 
+Fifth Generation robotics,
+Brevity is the soul of the wit
+Long before time had a name, the first spinjitsu master created ninjago 
+
 ## Project Overview 
 
 G5Robotics is an innovative open-source platform dedicated to advancing the fifth generation of robotics technology. Designed with both educators and developers in mind, G5Robotics provides cutting-edge tools, tutorials, and resources to foster learning and collaboration in robotics development. The "G5" in the name symbolizes this next evolutionary leap in robotics, focusing on smarter, more adaptable, and efficient robotic systems. By leveraging modern technology, G5Robotics empowers users to build, program, and experiment with robots that can seamlessly integrate into various real-world applications.
