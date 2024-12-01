@@ -1,6 +1,20 @@
 void  A() {  
   lc.clearDisplay(0);
+  lc.setLed(0,4,5,true);
+  lc.setLed(0,3,5,true);
+  lc.setLed(0,2,4,true);
+  lc.setLed(0,5,4,true);
+ 
+  lc.setLed(0,3,3, true);
+  lc.setLed(0,4,3, true);
+  lc.setLed(0,2,3, true);
+  lc.setLed(0,5,3, true);
+  
+  lc.setLed(0,2,2, true);
+  lc.setLed(0,2,1, true);
 
+  lc.setLed(0,5,2, true);
+  lc.setLed(0,5,1, true);
   delay(1000);
 }
 
@@ -39,7 +53,7 @@ void  E() {
   delay(1000);
 }
 
-void  F() {  
+void  Fx() {  
   lc.clearDisplay(0);
 
   delay(1000);
@@ -53,13 +67,35 @@ void  G() {
 
 void  H() {  
   lc.clearDisplay(0);
+lc.setLed(0,2,1, true);
+lc.setLed(0,2,2, true);
+lc.setLed(0,2,3, true);
+lc.setLed(0,2,4, true);
+lc.setLed(0,2,5, true);
 
+lc.setLed(0,5,1, true);
+lc.setLed(0,5,2, true);
+lc.setLed(0,5,3, true);
+lc.setLed(0,5,4, true);
+lc.setLed(0,5,5, true);
+
+lc.setLed(0,3,3, true);
+lc.setLed(0,4,3, true);
   delay(1000);
 }
 
 void  I() {  
   lc.clearDisplay(0);
+  lc.setLed(0,3,1,true);
+  lc.setLed(0,3,2,true);
+  lc.setLed(0,3,3,true);
+  lc.setLed(0,3,4,true);
+  lc.setLed(0,3,5,true);
+  lc.setLed(0,2,5,true);
+  lc.setLed(0,4,5,true);
 
+  lc.setLed(0,2,1,true);
+  lc.setLed(0,4,1,true);
   delay(1000);
 }
 
@@ -89,7 +125,21 @@ void  M() {
 
 void  N() {  
   lc.clearDisplay(0);
+lc.setLed(0,5,1, true);
+lc.setLed(0,5,2, true);
+lc.setLed(0,5,3, true);
+lc.setLed(0,5,4, true);
+lc.setLed(0,5,5, true);
 
+lc.setLed(0,1,1, true);
+lc.setLed(0,1,2, true);
+lc.setLed(0,1,3, true);
+lc.setLed(0,1,4, true);
+lc.setLed(0,1,5, true);
+
+lc.setLed(0,2,4, true);
+lc.setLed(0,3,3, true);
+lc.setLed(0,4,2, true);
   delay(1000);
 }
 void  O() {  
@@ -345,3 +395,4 @@ void  z() {
 
   delay(1000);
 }
+
