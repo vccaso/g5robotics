@@ -21,33 +21,4 @@ void   loop() {
   T();
 }
 
-void  E() {  
-  lc.clearDisplay(0);
-  lc.setLed(0,1,1,true);
-  lc.setLed(0,1,2,true);
-  lc.setLed(0,1,3,true);
-  lc.setLed(0,1,4,true);
-  lc.setLed(0,1,5,true);
-  lc.setLed(0,2,1,true);
-  lc.setLed(0,3,1,true);
-  lc.setLed(0,2,3,true);
-  lc.setLed(0,3,3,true);
-  lc.setLed(0,2,5,true);
-  lc.setLed(0,3,5,true);
-  delay(1000);
-}
-
-void T() {
-  lc.clearDisplay(0);
-  lc.setLed(0,3,1,true);
-  lc.setLed(0,3,2,true);
-  lc.setLed(0,3,3,true);
-  lc.setLed(0,3,4,true);
-  lc.setLed(0,3,5,true);
-  lc.setLed(0,2,5,true);
-  lc.setLed(0,1,5,true);
-  lc.setLed(0,4,5,true);
-  lc.setLed(0,5,5,true);
-  delay(1000);
-}
 
