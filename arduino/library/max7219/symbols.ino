@@ -54,6 +54,7 @@ void  percent() {
 
   delay(1000);
 }
+
 void  equal() {  
   lc.clearDisplay(0);
 
