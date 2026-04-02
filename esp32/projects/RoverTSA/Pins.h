@@ -8,14 +8,14 @@
 // Right side motors = Channel B (OUT3/OUT4)
 
 // LEFT side (two motors in parallel)
-static const int PIN_IN1 = 26;   // Direction pin 1
-static const int PIN_IN2 = 27;   // Direction pin 2
-static const int PIN_ENA = 14;   // Speed (PWM)
+static const int PIN_IN3 = 26;   // Direction pin 1
+static const int PIN_IN4 = 27;   // Direction pin 2
+static const int PIN_ENB = 14;   // Speed (PWM)
 
 // RIGHT side (two motors in parallel)
-static const int PIN_IN3 = 25;   // Direction pin 1
-static const int PIN_IN4 = 33;   // Direction pin 2
-static const int PIN_ENB = 32;   // Speed (PWM)
+static const int PIN_IN1 = 25;   // Direction pin 1
+static const int PIN_IN2 = 33;   // Direction pin 2
+static const int PIN_ENA = 32;   // Speed (PWM)
 
 // ===============================
 // PWM settings for ESP32 motors
@@ -28,8 +28,8 @@ static const int PWM_CH_RIGHT  = 1;
 // ===============================
 // I2C bus pins (OLED + PCA9685)
 // ===============================
-static const int PIN_I2C_SDA = 21;
-static const int PIN_I2C_SCL = 22;
+static const int PIN_I2C_SDA = 21;  //white. -  orange
+static const int PIN_I2C_SCL = 22;  //black - yellow
 
 // ===============================
 // Buttons (manual fallback later)
@@ -43,3 +43,15 @@ static const int PIN_BTN_B = 19; // SELECT
 static const int DEADZONE = 10;          // ignore small stick movement (%)
 static const float TURN_GAIN = 1.0f;     // steering sensitivity
 static const float THROTTLE_GAIN = 1.0f; // throttle sensitivity
+
+// ===============================
+// Arm
+// ===============================
+
+// PCA9685 (servo driver)
+static const uint8_t PCA9685_ADDR = 0x40;
+
+// Servo channels on PCA9685
+static const uint8_t SERVO_CH_ARM   = 0;  // shoulder OR elbow
+static const uint8_t SERVO_CH_WRIST = 1;  // wrist pitch
+static const uint8_t SERVO_CH_GRIP  = 2;  // fingers open/close
