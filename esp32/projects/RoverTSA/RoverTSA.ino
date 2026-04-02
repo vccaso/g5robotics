@@ -124,7 +124,7 @@ void setup() {
   arm.setLimits(
     {0, 160}, {0, 160}, {40, 110}
   ); // arm {front, back}, wrist{,}, grip {}
-  arm.setDefaults({ 90, 90, 60 });
+  arm.setDefaults({ 130, 130, 60 });
   arm.resetToDefaults(); 
 
 
