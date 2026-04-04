@@ -16,16 +16,20 @@ public:
     ArmMode = 2,
     Record = 3,
     Play = 4,
+    DemoMode = 5,
     COUNT
   };
 
   enum class SpeedMode : uint8_t { Fast, Slow };
   enum class ArmMode : uint8_t { Free, Sync };
 
+  enum class DemoMode : uint8_t { Demo, Innactive };
+
   struct Settings {
     SpeedMode speed = SpeedMode::Fast;
     bool bluetoothOn = true;
     ArmMode armMode = ArmMode::Sync;
+    DemoMode demoMode = DemoMode::Demo;
   };
 
   struct MenuState {
@@ -42,7 +46,7 @@ public:
 
   // UPDATED: status now shows speed + BT + REC/PLAY
   void showStatus(bool btEnabled, bool btConnected, SpeedMode speed,
-                  bool isRecording, bool isPlaying, ArmMode armMode);
+                  bool isRecording, bool isPlaying, ArmMode armMode, DemoMode demoMode);
 
   // UPDATED: menu now renders record/play states + hasTrack
   void renderMenuMain(const Settings& s, const MenuState& m,
@@ -62,6 +66,7 @@ private:
 
   const char* armModeLabel(ArmMode v) const;
 
+  const char* demoModeLabel(DemoMode v) const;
 
   void drawRow(uint8_t rowIndex, bool selected, const char* left, const char* right);
 };

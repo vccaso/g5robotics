@@ -104,8 +104,9 @@ const char* DisplayManager::menuItemLabel(MenuItem item) const {
   switch (item) {
     case MenuItem::Speed:     return "Drive Speed";
     case MenuItem::Bluetooth: return "Bluetooth";
-    case MenuItem::Record:    return "Record Track";
-    case MenuItem::Play:      return "Play Track";
+    // case MenuItem::Record:    return "Record Track";
+    // case MenuItem::Play:      return "Play Track";
+    case MenuItem::DemoMode:  return "Demo";
     case MenuItem::ArmMode:   return "Arm Mode";
     default:                  return "?";
   }
@@ -119,6 +120,13 @@ const char* DisplayManager::armModeLabel(DisplayManager::ArmMode v) const {
   }
 }
 
+const char* DisplayManager::demoModeLabel(DisplayManager::DemoMode v) const {
+  switch (v) {
+    case DisplayManager::DemoMode::Demo: return "Demo";
+    case DisplayManager::DemoMode::Innactive: return "Innactive";
+    default: return "?";
+  }
+}
 
 const char* DisplayManager::speedLabel(SpeedMode v) const {
   switch (v) {
@@ -165,7 +173,7 @@ void DisplayManager::showInitializing() {
 }
 
 void DisplayManager::showStatus(bool btEnabled, bool btConnected, SpeedMode speed,
-                                bool isRecording, bool isPlaying, ArmMode armMode) {
+                                bool isRecording, bool isPlaying, ArmMode armMode, DemoMode demoMode) {
   if (!_ok) return;
 
   clearAndHeader(F("BT-Rover"));
@@ -182,9 +190,12 @@ void DisplayManager::showStatus(bool btEnabled, bool btConnected, SpeedMode spee
 
   // Mode label
   display.setCursor(20, 18);
-  if (isRecording) display.print(F("REC"));
-  else if (isPlaying) display.print(F("PLAY"));
-  else display.print(F("READY"));
+  // if (isRecording) display.print(F("REC"));
+  // else if (isPlaying) display.print(F("PLAY"));
+  // else display.print(F("READY"));
+  if (demoMode == DemoMode::Demo) display.write("Demo");
+  else if (demoMode == DemoMode::Innactive) display.write("");
+
 
   // arm mode (Sync,Free)
   display.setCursor(65,35);
@@ -244,15 +255,19 @@ void DisplayManager::renderMenuMain(const Settings& s, const MenuState& m,
           this->armModeLabel(s.armMode));
 
   // Row 3: Record
-  drawRow(3, m.cursor == MenuItem::Record,
-          menuItemLabel(MenuItem::Record),
-          isRecording ? "REC" : "Ready");
+  // drawRow(3, m.cursor == MenuItem::Record,
+  //         menuItemLabel(MenuItem::Record),
+  //         isRecording ? "REC" : "Ready");
+
+  drawRow(3, m.cursor == MenuItem::DemoMode,
+          menuItemLabel(MenuItem::DemoMode),
+          this->demoModeLabel(s.demoMode));
 
   // Row 4: Play
-  const char* playVal = isPlaying ? "PLAY" : (hasTrack ? "Ready" : "No Track");
-  drawRow(4, m.cursor == MenuItem::Play,
-          menuItemLabel(MenuItem::Play),
-          playVal);
+  // const char* playVal = isPlaying ? "PLAY" : (hasTrack ? "Ready" : "No Track");
+  // drawRow(4, m.cursor == MenuItem::Play,
+  //         menuItemLabel(MenuItem::Play),
+  //         playVal);
 
 
   // Draw icon at right side
