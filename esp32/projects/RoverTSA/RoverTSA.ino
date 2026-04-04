@@ -121,9 +121,14 @@ void setup() {
               ? ServoController::ArmMode::Free
               : ServoController::ArmMode::Sync);
 
+  // arm {front, back}, wrist{,}, grip {}
+  // arm:
+  // wrist:
+  // grip limits: 
+  //    lower -> open grip, upper -> close grip
   arm.setLimits(
-    {0, 160}, {0, 160}, {40, 110}
-  ); // arm {front, back}, wrist{,}, grip {}
+    {0, 160}, {0, 160}, {40, 130}
+  ); 
   arm.setDefaults({ 130, 130, 60 });
   arm.resetToDefaults(); 
 
