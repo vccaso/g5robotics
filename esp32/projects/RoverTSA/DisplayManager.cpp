@@ -190,19 +190,26 @@ void DisplayManager::showStatus(bool btEnabled, bool btConnected, SpeedMode spee
 
   // Mode label
   display.setCursor(20, 18);
+  display.setTextSize(3);
   // if (isRecording) display.print(F("REC"));
   // else if (isPlaying) display.print(F("PLAY"));
   // else display.print(F("READY"));
-  if (demoMode == DemoMode::Demo) display.write("Demo");
-  else if (demoMode == DemoMode::Innactive) display.write("");
+  if (demoMode == DemoMode::Demo) {
+    
+    display.write("Demo");
+  }
+  else if (demoMode == DemoMode::Innactive) {
+    
+      // arm mode (Sync,Free)
+    display.setCursor(65,35);
+    display.setTextSize(2);
+    if (armMode == ArmMode::Free) display.write("Free");
+    else if (armMode == ArmMode::Sync) display.write("Sync");
+    else display.print(F("??"));
+
+  }
 
 
-  // arm mode (Sync,Free)
-  display.setCursor(65,35);
-  display.setTextSize(2);
-  if (armMode == ArmMode::Free) display.write("Free");
-  else if (armMode == ArmMode::Sync) display.write("Sync");
-  else display.print(F("??"));
 
   display.setTextSize(1);
 

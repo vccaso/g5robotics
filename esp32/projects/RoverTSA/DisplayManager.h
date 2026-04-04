@@ -14,9 +14,9 @@ public:
     Speed = 0,
     Bluetooth = 1,
     ArmMode = 2,
-    Record = 3,
+    Record = 5,
     Play = 4,
-    DemoMode = 5,
+    DemoMode = 3,
     COUNT
   };
 

@@ -174,16 +174,16 @@ void loop() {
   // While recording or playing: any of these stops immediately.
   const bool stopNow = bLong || menuBtn || bShort;
 
-  if (track.isRecording() && stopNow) {
-    track.stopRecording();   // saves to flash
-    motors.stop();
-    menu.screen = DisplayManager::UiScreen::Status;
-  }
-  if (track.isPlaying() && stopNow) {
-    track.stopPlayback();
-    motors.stop();
-    menu.screen = DisplayManager::UiScreen::Status;
-  }
+  // if (track.isRecording() && stopNow) {
+  //   track.stopRecording();   // saves to flash
+  //   motors.stop();
+  //   menu.screen = DisplayManager::UiScreen::Status;
+  // }
+  // if (track.isPlaying() && stopNow) {
+  //   track.stopPlayback();
+  //   motors.stop();
+  //   menu.screen = DisplayManager::UiScreen::Status;
+  // }
 
   // If we just stopped recording/playback, suppress menu toggling this loop.
   const bool suppressMenuToggle = busyBefore && stopNow;
@@ -282,6 +282,19 @@ void loop() {
         // arm.resetToDefaults();
       }
     }
+
+    // ---- Demo Mode: Demo <-> Innactive ----
+    if (menu.cursor == DisplayManager::MenuItem::DemoMode) {
+      if (xbox.dpadLeftPressed() || xbox.dpadRightPressed() || selectPressed) {
+
+        settings.demoMode = (settings.demoMode == DisplayManager::DemoMode::Demo)
+                            ? DisplayManager::DemoMode::Innactive
+                            : DisplayManager::DemoMode::Demo;
+
+        //TODO: Implement Demo mode here
+      }
+    }
+
 
 
     // ---- Play Track: B short starts playback (if exists), exits menu ----
@@ -391,7 +404,7 @@ void loop() {
 
     if (menu.screen == DisplayManager::UiScreen::Status) {
       display.showStatus(settings.bluetoothOn, xbox.isConnected(),
-                         settings.speed, track.isRecording(), track.isPlaying(), settings.armMode);
+                         settings.speed, track.isRecording(), track.isPlaying(), settings.armMode, settings.demoMode);
     } else {
       display.renderMenuMain(settings, menu,
                              track.isRecording(), track.isPlaying(),
