@@ -20,6 +20,10 @@ In addition to advancing technology, G5Robotics is committed to making robotics 
 ## Installation Instructions
 How to install and run your project.
 
+### RoverTSA project
+Board manager URL: https://raw.githubusercontent.com/ricardoquesada/esp32-arduino-lib-builder/master/bluepad32_files/package_esp32_bluepad32_index.json
+
+
 ## Usage Examples
 Show people how to use it.
 
