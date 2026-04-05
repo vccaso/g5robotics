@@ -183,10 +183,13 @@ void DisplayManager::showStatus(bool btEnabled, bool btConnected, SpeedMode spee
   if (speed == SpeedMode::Fast) sp = 'F';
   else if (speed == SpeedMode::Slow) sp = 'S';
 
-  display.setTextSize(2);
-  display.setCursor(0, 14);
-  display.write(sp);
-  display.setTextSize(1);
+  if(demoMode==DisplayManager::DemoMode::Innactive)
+  {
+    display.setTextSize(2);
+    display.setCursor(0, 14);
+    display.write(sp);
+    display.setTextSize(1);
+  }
 
   // Mode label
   display.setCursor(20, 18);

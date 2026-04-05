@@ -277,9 +277,6 @@ void loop() {
         arm.setMode(settings.armMode == DisplayManager::ArmMode::Free
                       ? ServoController::ArmMode::Free
                       : ServoController::ArmMode::Sync);
-
-        // Optional: make mode switch predictable
-        // arm.resetToDefaults();
       }
     }
 
