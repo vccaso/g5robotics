@@ -314,7 +314,7 @@ void loop() {
 
 
   // Only control arm in Status screen, and only when not recording/playing
-  if (menu.screen == DisplayManager::UiScreen::Status && xbox.isConnected() && !wasBusy) {
+  if (menu.screen == DisplayManager::UiScreen::Status && xbox.isConnected() && !wasBusy && settings.demoMode == DisplayManager::DemoMode::Innactive) {
 
     const uint32_t now = millis();
     const uint32_t PERIOD_MS = 60;
@@ -365,8 +365,8 @@ void loop() {
         motors.stop();
       }
     }
-    else {
-      // Normal Xbox drive
+    else if((settings.demoMode == DisplayManager::DemoMode::Innactive)) {
+      // Normal Xbox drive 4 wheels
       int left = 0, right = 0;
       if (xbox.getDriveCommand(left, right)) {
         lastCmdMs = millis();
