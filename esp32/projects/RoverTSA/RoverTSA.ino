@@ -288,7 +288,7 @@ void loop() {
                             ? DisplayManager::DemoMode::Innactive
                             : DisplayManager::DemoMode::Demo;
 
-        //TODO: Implement Demo mode here
+        
       }
     }
 
@@ -395,6 +395,42 @@ void loop() {
     motors.stop();
   }
 
+
+  // DEMO seaction
+  if(settings.demoMode == DisplayManager::DemoMode::Demo)
+  {
+        if (xPressed==true) {
+          //run demo 1
+          motors.setLeftRight(0, 200);
+          delay(1000);
+          motors.setLeftRight(200, 0);
+          delay(1000);
+          motors.setLeftRight(200, 200);
+          delay(1000);
+          motors.setLeftRight(-200, 200);
+          delay(1000);
+          motors.setLeftRight(0, -200);
+          delay(1000);
+          motors.setLeftRight(-200, 0);
+          delay(1000);
+          motors.setLeftRight(-200, -200);
+          delay(1000);
+          motors.setLeftRight(200, -200);
+          delay(1000);
+          motors.stop();
+        }
+
+        if (xbox.dpadUpPressed()){
+          arm.nudgeArmDeg(15);
+          arm.nudgeGripDeg(15);
+          arm.nudgeWristDeg(15);
+          arm.nudgeArmDeg(-15);
+          arm.nudgeGripDeg(-15);
+          arm.nudgeWristDeg(-15);
+        }
+  }
+
+  
   // ===== DISPLAY =====
   if (millis() - lastUiMs >= UI_PERIOD_MS) {
     lastUiMs = millis();
