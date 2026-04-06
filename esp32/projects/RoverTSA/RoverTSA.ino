@@ -421,12 +421,12 @@ void loop() {
         }
 
         if (xbox.dpadUpPressed()){
-          arm.nudgeArmDeg(15);
-          arm.nudgeGripDeg(15);
-          arm.nudgeWristDeg(15);
-          arm.nudgeArmDeg(-15);
-          arm.nudgeGripDeg(-15);
-          arm.nudgeWristDeg(-15);
+          moveArm(10,10);
+          delay(1000);
+          moveArm(-50,30);
+          //arm.nudgeGripDeg(15);
+          // arm.nudgeWristDeg(15);
+
         }
   }
 
@@ -446,4 +446,15 @@ void loop() {
   }
 
   delay(5);
+}
+
+
+
+void moveArm(int degree, int slowness) {
+    int increment = (degree > 0) ? 1 : -1;
+    for(int i=0; i< abs(degree); i++)
+    {
+      arm.nudgeArmDeg(increment);
+      delay(slowness);
+    }
 }
