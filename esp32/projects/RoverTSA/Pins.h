@@ -8,13 +8,13 @@
 // Right side motors = Channel B (OUT3/OUT4)
 
 // LEFT side (two motors in parallel)
-static const int PIN_IN3 = 26;   // Direction pin 1
-static const int PIN_IN4 = 27;   // Direction pin 2
+static const int PIN_IN3 = 27;   // Direction pin 1
+static const int PIN_IN4 = 26;   // Direction pin 2
 static const int PIN_ENB = 14;   // Speed (PWM)
 
 // RIGHT side (two motors in parallel)
-static const int PIN_IN1 = 25;   // Direction pin 1
-static const int PIN_IN2 = 33;   // Direction pin 2
+static const int PIN_IN1 = 33;   // Direction pin 1
+static const int PIN_IN2 = 25;   // Direction pin 2
 static const int PIN_ENA = 32;   // Speed (PWM)
 
 // ===============================

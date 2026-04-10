@@ -420,13 +420,42 @@ void loop() {
           motors.stop();
         }
 
-        if (xbox.dpadUpPressed()){
+        if (xbox.dpadLeftPressed()){
           moveArm(10,10);
           delay(1000);
           moveArm(-50,30);
           //arm.nudgeGripDeg(15);
           // arm.nudgeWristDeg(15);
 
+        }
+
+        if (xbox.dpadRightPressed()){
+          //move forward
+          motors.setLeftRight(-200, -200);
+          delay(2000);
+          // turn left
+          motors.setLeftRight(200, -200);
+          delay(1000);
+          // move forward
+          motors.setLeftRight(-200, -200);
+          delay(1500);
+          // pick up somthing
+          moveArm(-30,40);
+          moveGrip(40,20);
+          moveArm(30,10);
+          // move backward
+          motors.setLeftRight(200, 200);
+          delay(1500);
+          // turn right twice
+          motors.setLeftRight(-200, 200);
+          delay(2000);
+          // move forward
+          motors.setLeftRight(-200, -200);
+          // drop load
+          moveArm(-30,40);
+          moveGrip(-40,20);
+          moveArm(30,10);
+          motors.stop();
         }
   }
 
@@ -455,6 +484,24 @@ void moveArm(int degree, int slowness) {
     for(int i=0; i< abs(degree); i++)
     {
       arm.nudgeArmDeg(increment);
+      delay(slowness);
+    }
+}
+
+void moveWrist(int degree, int slowness) {
+    int increment = (degree > 0) ? 1 : -1;
+    for(int i=0; i< abs(degree); i++)
+    {
+      arm.nudgeWristDeg(increment);
+      delay(slowness);
+    }
+}
+
+void moveGrip(int degree, int slowness) {
+    int increment = (degree > 0) ? 1 : -1;
+    for(int i=0; i< abs(degree); i++)
+    {
+      arm.nudgeGripDeg(increment);
       delay(slowness);
     }
 }
