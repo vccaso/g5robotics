@@ -29,7 +29,7 @@ public:
     SpeedMode speed = SpeedMode::Fast;
     bool bluetoothOn = true;
     ArmMode armMode = ArmMode::Sync;
-    DemoMode demoMode = DemoMode::Demo;
+    DemoMode demoMode = DemoMode::Innactive;
   };
 
   struct MenuState {
