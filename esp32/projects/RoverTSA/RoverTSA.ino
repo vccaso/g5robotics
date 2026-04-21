@@ -396,6 +396,26 @@ void loop() {
   }
 
 
+  if(settings.armMode == DisplayManager::ArmMode::Free)
+  {
+      if (xbox.dpadDownPressed()){
+          //move the arm to the lower limit
+          arm.setArmDeg(0);
+          // move the wrist to some value
+          arm.setWristDeg(0);
+          //close the grip
+          arm.setGripDeg(130);
+        }
+
+        if (xbox.dpadRightPressed()){
+          //move the arm to the lower limit
+          arm.setArmDeg(80);
+          // move the wrist to some value
+          arm.setWristDeg(70);
+        }
+
+  }
+
   // DEMO seaction
   if(settings.demoMode == DisplayManager::DemoMode::Demo)
   {
@@ -476,6 +496,8 @@ void loop() {
 
   delay(5);
 }
+
+
 
 
 
