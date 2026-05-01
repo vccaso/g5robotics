@@ -112,9 +112,6 @@ void setup() {
   menu.screen = DisplayManager::UiScreen::Status;
   menu.cursor = DisplayManager::MenuItem::Speed;
 
-
-
-  arm.setMode(ServoController::ArmMode::Free);
   arm.begin();
   // keep arm mode synced with menu setting
   arm.setMode(settings.armMode == DisplayManager::ArmMode::Free
@@ -127,9 +124,9 @@ void setup() {
   // grip limits: 
   //    lower -> open grip, upper -> close grip
   arm.setLimits(
-    {0, 160}, {0, 160}, {40, 130}
+    {0, 160}, {0, 160}, {62, 130} //40-> 55mm //90-> 39mm 70->47mm
   ); 
-  arm.setDefaults({ 130, 130, 60 });
+  arm.setDefaults({ 130, 130, 90 });
   arm.resetToDefaults(); 
 
 

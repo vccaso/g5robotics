@@ -28,7 +28,7 @@ public:
   struct Settings {
     SpeedMode speed = SpeedMode::Fast;
     bool bluetoothOn = true;
-    ArmMode armMode = ArmMode::Sync;
+    ArmMode armMode = ArmMode::Free;
     DemoMode demoMode = DemoMode::Innactive;
   };
 
