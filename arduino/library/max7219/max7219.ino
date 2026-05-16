@@ -191,36 +191,104 @@ const byte *getCharData(char c) {
   return char_space;
 }
 
-// Function to scroll text across all 8 displays
-void scrollText(String text, int speed) {
-  // Add padding to clear the screen at the end
-  text = text + "        ";
+// Scrolling Directions
+enum ScrollDir { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT };
 
-  for (int i = 0; i < text.length(); i++) {
-    const byte *data = getCharData(text[i]);
-
-    // Each character has 8 columns
-    for (int col = 0; col < 8; col++) {
-      for (int r = 0; r < 8; r++) {
-        // Bit to insert from the new character
-        bool nextBit = bitRead(data[r], 7 - col);
-
-        // Shift across all 8 displays (from display 0 towards 7)
-        for (int d = 0; d <= 7; d++) {
-          bool bitFallingOff = bitRead(vBuf[d][r], 7);
-          vBuf[d][r] = (vBuf[d][r] << 1) | (nextBit ? 1 : 0);
-          nextBit = bitFallingOff;
-        }
-      }
-
-      // Update hardware
-      for (int d = 0; d < 8; d++) {
-        for (int r = 0; r < 8; r++) {
-          lc.setRow(d, r, vBuf[d][r]);
-        }
-      }
-      delay(speed);
+// Helper function to update hardware from buffer
+void updateDisplays() {
+  for (int d = 0; d < 8; d++) {
+    for (int r = 0; r < 8; r++) {
+      lc.setRow(d, r, vBuf[d][r]);
     }
+  }
+}
+
+// Function to scroll text across all 8 displays in 4 directions
+void scrollText(String text, int speed, ScrollDir dir = DIR_LEFT) {
+  if (dir == DIR_LEFT || dir == DIR_RIGHT) {
+    // Add padding to ensure the text starts/ends off-screen
+    if (dir == DIR_LEFT) text = text + "        ";
+    else text = "        " + text;
+
+    int len = text.length();
+    // For LEFT, we go from index 0 to len-1. For RIGHT, we go from len-1 to 0.
+    for (int i = 0; i < len; i++) {
+      int charIdx = (dir == DIR_LEFT) ? i : (len - 1 - i);
+      const byte *data = getCharData(text[charIdx]);
+
+      for (int col = 0; col < 8; col++) {
+        for (int r = 0; r < 8; r++) {
+          // For LEFT, columns enter from the right (0 to 7).
+          // For RIGHT, columns enter from the left (7 to 0).
+          bool nextBit = (dir == DIR_LEFT) ? bitRead(data[r], 7 - col)
+                                           : bitRead(data[r], col);
+
+          if (dir == DIR_LEFT) {
+            // Shift display 0 towards 7 (Leftwards movement)
+            for (int d = 0; d <= 7; d++) {
+              bool bitFallingOff = bitRead(vBuf[d][r], 7);
+              vBuf[d][r] = (vBuf[d][r] << 1) | (nextBit ? 1 : 0);
+              nextBit = bitFallingOff;
+            }
+          } else {
+            // Shift display 7 towards 0 (Rightwards movement)
+            for (int d = 7; d >= 0; d--) {
+              bool bitFallingOff = bitRead(vBuf[d][r], 0);
+              vBuf[d][r] = (vBuf[d][r] >> 1) | (nextBit ? 128 : 0);
+              nextBit = bitFallingOff;
+            }
+          }
+        }
+        updateDisplays();
+        delay(speed);
+      }
+    }
+  } else {
+
+    // Vertical scrolling logic (Paged)
+    for (int i = 0; i < text.length(); i += 8) {
+      String sub = text.substring(i, i + 8);
+      while (sub.length() < 8)
+        sub += " ";
+
+      // Scroll in
+      for (int step = 0; step < 8; step++) {
+        for (int d = 0; d < 8; d++) {
+          // Reverse character mapping: Display 0 is right, 7 is left
+          const byte *data = getCharData(sub[7 - d]);
+          if (dir == DIR_UP) {
+            for (int r = 0; r < 7; r++)
+              vBuf[d][r] = vBuf[d][r + 1];
+            vBuf[d][7] = data[step];
+          } else {
+            for (int r = 7; r > 0; r--)
+              vBuf[d][r] = vBuf[d][r - 1];
+            vBuf[d][0] = data[7 - step];
+          }
+        }
+        updateDisplays();
+        delay(speed);
+      }
+      delay(speed * 5); // Pause to read
+
+      // Scroll out
+      for (int step = 0; step < 8; step++) {
+        for (int d = 0; d < 8; d++) {
+          if (dir == DIR_UP) {
+            for (int r = 0; r < 7; r++)
+              vBuf[d][r] = vBuf[d][r + 1];
+            vBuf[d][7] = 0;
+          } else {
+            for (int r = 7; r > 0; r--)
+              vBuf[d][r] = vBuf[d][r - 1];
+            vBuf[d][0] = 0;
+          }
+        }
+        updateDisplays();
+        delay(speed);
+      }
+    }
+
   }
 }
 
@@ -234,4 +302,13 @@ void setup() {
   }
 }
 
-void loop() { scrollText("G5 Robotics", 60); }
+void loop() {
+  scrollText("Mom", 10, DIR_RIGHT);
+  delay(500);
+  scrollText("love you", 10, DIR_LEFT);
+  delay(500);
+  scrollText("Ethan", 10, DIR_UP);
+  delay(500);
+  scrollText("& Eli ", 10, DIR_DOWN);
+  delay(500);
+}
