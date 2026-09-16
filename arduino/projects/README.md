@@ -52,6 +52,7 @@ A 4WD/4WS omnidirectional rover utilizing a PCA9685 I2C 16-channel PWM controlle
   - Motor 2 (Front Right): `EN = 5`, `IN1 = 8`, `IN2 = 12`
   - Motor 3 (Rear Left): `EN = 6`, `IN1 = A0`, `IN2 = A1`
   - Motor 4 (Rear Right): `EN = 9`, `IN1 = A2`, `IN2 = A3`
+- **3D CAD & Chassis Models**: Stored in [3dmodels](file:///Users/developer/src/g5robotics/arduino/projects/rover3/3dmodels) (includes STL files and assembly photos).
 
 #### Key Software Features
 - **Zero-Radius On-Axis Tangential Spin**: Positions Front-Left & Rear-Right wheels to $+45^\circ$ and Front-Right & Rear-Left wheels to $-45^\circ$ ($135^\circ$), allowing all 4 motors driving forward to spin the robot $360^\circ$ on its central midpoint axis.
